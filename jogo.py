@@ -1,2 +1,5 @@
 print("Bem-vindo ao meu primeiro jogo!")
-print("Estou aprendendo Python, Git e GitHub.")
+
+nome = input("Qual é o seu nome? ")
+
+print(f"Olá, {nome}! Vamos jogar.")
