@@ -1,4 +1,4 @@
-import os  """Isso ai"""
+import os
 import WConio2 as WConio2
 import sys
 
@@ -47,12 +47,17 @@ while True:
             for j in range(colunas):
                 M[i].append(' ') #adicionei elementos na linha i
 
+    cobra = [
+        [3, 3],
+        [3, 2],
+        [3, 1]
+    ]
 
-
-
-    bichoI = 3
-    bichoJ = 3
     bicho = '@'
+
+    ##bichoI = 3
+    ##bichoJ = 3
+    ##bicho = '@'
 
 
     os.system('cls')    #apaga a atela
@@ -69,10 +74,15 @@ while True:
 
 
                     #desenhando os personagens
-                M[bichoI][bichoJ] = bicho
-                M[bichoI+1][bichoJ] = bicho
-                M[bichoI+1][bichoJ-1] = bicho
-                M[bichoI+1][bichoJ+1] = bicho
+                for parte in cobra:
+                    i = parte[0]
+                    j = parte[1]
+
+                    M[i][j] = bicho
+                #M[bichoI][bichoJ] = bicho
+                #M[bichoI+1][bichoJ] = bicho
+                #M[bichoI+1][bichoJ-1] = bicho
+                #M[bichoI+1][bichoJ+1] = bicho
 
 
                 #imprimir uma matriz
@@ -90,16 +100,38 @@ while True:
 
                 print(tela)
 
+                if WConio2.kbhit():
+                     codigo, letra = Wconio2.getch()
 
-                if(WConio2.kbhit()):  #verifica se uma tecla foi apertada
-                    codigo, letra = WConio2.getch()  #captura a tecla apertada
+                     novaI = cobra[0][0]
+                     novaJ = cobra[0][1]
+
+                     if letra == 'a':
+                         novaJ -= 1 
+                     elif letra == 'd':
+                         novaJ += 1
+                     elif letra == 'w':
+                         novaI -= 1
+                     elif letra == 's':
+                         novaI += 1
+
+                     else:
+                         continue
+
+                     novaI = novaI % linhas
+                     novaJ = novaJ % colunas
+
+                     cobra.insert(0, [novaI, novaJ])
+                     cobra.pop()
+                #if(WConio2.kbhit()):  #verifica se uma tecla foi apertada
+                    #codigo, letra = WConio2.getch()  #captura a tecla apertada
 
 
-                    if(letra == 'a' and bichoJ > 0):
-                        bichoJ -=1
-                    elif(letra == 'd' and bichoJ < (colunas-1)):
-                        bichoJ +=1
-                    if(letra == 'w' and bichoI > 0):
-                        bichoI -=1
-                    elif(letra == 's' and bichoI < (linhas-1)):
-                        bichoI +=1
+                    #if(letra == 'a' and bichoJ > 0):
+                        #bichoJ -=1
+                    #elif(letra == 'd' and bichoJ < (colunas-1)):
+                       #bichoJ +=1
+                    #if(letra == 'w' and bichoI > 0):
+                        #bichoI -=1
+                    #elif(letra == 's' and bichoI < (linhas-1)):
+                        #bichoI +=1
