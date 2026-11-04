@@ -1,4 +1,4 @@
-import os 
+import os  """Isso ai"""
 import WConio2 as WConio2
 import sys
 
