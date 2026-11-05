@@ -1,5 +1,5 @@
 import os
-import WConio2 as WConio2
+# import WConio2 as WConio2
 import sys
 
 
@@ -55,6 +55,12 @@ while True:
 
     bicho = '@'
 
+    comidaI = 5
+    comidaJ = 10
+    comida = '*'
+
+
+
     ##bichoI = 3
     ##bichoJ = 3
     ##bicho = '@'
@@ -64,7 +70,8 @@ while True:
 
 
     while(True):
-                WConio2.gotoxy(0,0)  #apaga a tela
+                os.system('cls')    #apaga a tela
+                # WConio2.gotoxy(0,0)  #apaga a tela
 
 
             #apagar a matriz
@@ -83,6 +90,13 @@ while True:
                 #M[bichoI+1][bichoJ] = bicho
                 #M[bichoI+1][bichoJ-1] = bicho
                 #M[bichoI+1][bichoJ+1] = bicho
+                for parte in cobra:
+                    i = parte[0]
+                    j = parte[1]
+
+                    M[i][j] = bicho
+
+                    M[comidaI][comidaJ] = comida
 
 
                 #imprimir uma matriz
@@ -100,29 +114,70 @@ while True:
 
                 print(tela)
 
-                if WConio2.kbhit():
-                     codigo, letra = Wconio2.getch()
 
-                     novaI = cobra[0][0]
-                     novaJ = cobra[0][1]
+                #Temporariamente usaremos:
 
-                     if letra == 'a':
-                         novaJ -= 1 
-                     elif letra == 'd':
-                         novaJ += 1
-                     elif letra == 'w':
-                         novaI -= 1
-                     elif letra == 's':
-                         novaI += 1
+                tecla = input("Movimento (W/A/S/D): ").lower()
 
-                     else:
-                         continue
+                novaI = cobra[0][0]
+                novaJ = cobra[0][1]
 
-                     novaI = novaI % linhas
-                     novaJ = novaJ % colunas
+                if tecla == 'a':
+                    novaJ -= 1  
+                elif tecla == 'd':
+                    novaJ += 1
+                elif tecla == 'w':
+                    novaI -= 1
+                elif tecla == 's':
+                    novaI += 1
 
-                     cobra.insert(0, [novaI, novaJ])
-                     cobra.pop()
+                else:
+                    print("Tecla inválida.")
+                    continue
+
+                novaI = novaI % linhas
+                novaJ = novaJ % colunas
+
+                if [novaI, novaJ] == [comidaI, comidaJ]:
+                    print("Você comeu a comida!")
+                    cobra.insert(0, [novaI, novaJ])
+
+                    comidaI = -1
+                    comidaJ = -1
+                else:
+                    cobra.insert(0, [novaI, novaJ])
+                    cobra.pop()
+
+                
+                #Esta parte será utilizada depois.
+
+                # if WConio2.kbhit():
+                    # codigo, letra = Wconio2.getch()
+
+                     #novaI = cobra[0][0]
+                     #novaJ = cobra[0][1]
+
+                     #if letra == 'a':
+                        # novaJ -= 1 
+                     #elif letra == 'd':
+                       #  novaJ += 1
+                    # elif letra == 'w':
+                    #     novaI -= 1
+                    # elif letra == 's':
+                    #     novaI += 1
+
+                    # else:
+                     #    continue
+
+                     #novaI = novaI % linhas
+                     #novaJ = novaJ % colunas
+
+                     #cobra.insert(0, [novaI, novaJ])
+                     #cobra.pop()
+                     
+
+                     #Antiga
+
                 #if(WConio2.kbhit()):  #verifica se uma tecla foi apertada
                     #codigo, letra = WConio2.getch()  #captura a tecla apertada
 
