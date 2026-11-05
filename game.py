@@ -1,6 +1,8 @@
+from ast import While
 import os
 # import WConio2 as WConio2
 import sys
+import random
 
 
 #desenhar o menu de opções
@@ -142,9 +144,14 @@ while True:
                     print("Você comeu a comida!")
                     cobra.insert(0, [novaI, novaJ])
 
-                    comidaI = -1
-                    comidaJ = -1
+                    while True:
+
+                        comidaI = random.randint(0, linhas - 1)
+                        comidaJ = random.randint(0, colunas - 1)
+                        if [comidaI, comidaJ] not in cobra:
+                            break
                 else:
+
                     cobra.insert(0, [novaI, novaJ])
                     cobra.pop()
 
