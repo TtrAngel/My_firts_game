@@ -55,6 +55,8 @@ while True:
         [3, 1]
     ]
 
+    pontuacao = 0
+
     bicho = '@'
 
     comidaI = 5
@@ -115,6 +117,7 @@ while True:
 
 
                 print(tela)
+                print(f"Pontuação: {pontuacao}")
 
 
                 #Temporariamente usaremos:
@@ -140,21 +143,28 @@ while True:
                 novaI = novaI % linhas
                 novaJ = novaJ % colunas
 
+                if [novaI, novaJ] in cobra:
+                    print("Você perdeu! A cobra bateu no próprio corpo.")
+                    break
+                    
+
                 if [novaI, novaJ] == [comidaI, comidaJ]:
                     print("Você comeu a comida!")
+                    pontuacao += 10
                     cobra.insert(0, [novaI, novaJ])
 
-                    while True:
+    while True:
 
                         comidaI = random.randint(0, linhas - 1)
                         comidaJ = random.randint(0, colunas - 1)
                         if [comidaI, comidaJ] not in cobra:
                             break
-                else:
 
-                    cobra.insert(0, [novaI, novaJ])
-                    cobra.pop()
+                        else:
 
+                            cobra.insert(0, [novaI, novaJ])
+                            cobra.pop()
+                    
                 
                 #Esta parte será utilizada depois.
 
@@ -197,3 +207,15 @@ while True:
                         #bichoI -=1
                     #elif(letra == 's' and bichoI < (linhas-1)):
                         #bichoI +=1
+
+            
+    os.system('cls')
+
+    print("============================================================")
+    print("                         Fim de jogo")
+    print("============================================================")
+    print(f"Sua pontuação final foi: {pontuacao}")
+    print("\nVocê perdeu!")
+    
+    input("\nPressione ENTER para sair...")
+    break
