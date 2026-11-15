@@ -2,6 +2,8 @@
 import os
 import sys
 import random
+import time
+import WConio2 as Wconio2
 import WConio2
 
 
@@ -34,8 +36,8 @@ os.system("pause")
 
 # Configurações iniciais
 espaco = ' '
-linhas = 20
-colunas = 50
+linhas = 15
+colunas = 35
 
 while True:
 
@@ -69,11 +71,11 @@ while True:
 
         if [comidaI, comidaJ] not in cobra:
             break
+    direcao = 'd'
 
     # Loop principal do jogo
     while True:
-
-        os.system('cls')
+        Wconio2.gotoxy(0, 0) #apaga a tela
 
         # Apagar o conteúdo da matriz
         for i in range(linhas):
@@ -100,31 +102,30 @@ while True:
 
         print(f"Pontuação: {pontuacao}")
 
-        # Capturar a tecla pressionada
-        codigo, tecla = WConio2.getch()
-        tecla = tecla.lower()
+        # Capturar a tecla sem interromper o jogo
+        if WConio2.kbhit():
+            codigo, tecla = WConio2.getch()
+            tecla = tecla.lower()
 
+            if tecla in ['a', 'd', 'w', 's']:
+                direcao = tecla
+ 
         # Posição da cabeça da cobra
         novaI = cobra[0][0]
         novaJ = cobra[0][1]
 
-        # Movimentação
-        if tecla == 'a':
+        # Movimentação conforme a direção atual
+        if direcao == 'a':
             novaJ -= 1
 
-        elif tecla == 'd':
+        elif direcao == 'd':
             novaJ += 1
 
-        elif tecla == 'w':
+        elif direcao == 'w':
             novaI -= 1
 
-        elif tecla == 's':
+        elif direcao == 's':
             novaI += 1
-
-        else:
-            print("Tecla inválida.")
-            continue
-
         # Permitir atravessar as bordas
         novaI = novaI % linhas
         novaJ = novaJ % colunas
@@ -150,9 +151,11 @@ while True:
 
                 if [comidaI, comidaJ] not in cobra:
                     break
+            
 
         else:
             cobra.pop()
+        time.sleep(0.15)
 
     # Tela de fim de jogo
     os.system('cls')
