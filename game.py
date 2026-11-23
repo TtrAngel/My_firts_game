@@ -20,7 +20,7 @@ print(amarelo)
 print("____________________________________________________________")
 print("\n")
 print(azul)
-print("\t\t\t   Comendo um monte:\n")
+print("\t\t\t   CDDomendo um monte:\n")
 print(branco)
 print("\t\t\t       WELCOME\n")
 print(azul)
@@ -44,6 +44,53 @@ else:
 
 os.system("pause")
 
+pausado = False
+tempo_inicio = time.perf_counter()
+tempo_total_pausado = 0.0
+inicio_pausa = 0.0
+
+Wconio2.clrscr()
+Wconio2.setcursortype(0)  # Esconde o cursor
+
+try:
+    while True:
+        # 1. Verifica se alguma tecla foi pressionada
+        if Wconio2.kbhit():
+            tecla = Wconio2.getch()[1].lower()
+
+            if tecla == 'p':
+                pausado = not pausado  # Alterna entre pausado e rodando
+
+                if pausado:
+                    inicio_pausa = time.perf_counter()
+                    Wconio2.gotoxy(0, 3)
+                    Wconio2.cputs("=== JOGO PAUSADO (Pressione P para voltar) ===")
+                else:
+                    # Soma o tempo que ficou parado ao acumulador
+                    tempo_total_pausado += time.perf_counter() - inicio_pausa
+                    Wconio2.gotoxy(0, 3)
+                    Wconio2.cputs("                                              ")
+
+            elif tecla == 'q':  # Tecla para sair
+                break
+
+        # 2. Lógica do jogo só roda se NÃO estiver pausado
+        if not pausado:
+            agora = time.perf_counter()
+            tempo_decorrido = agora - tempo_inicio - tempo_total_pausado
+
+            Wconio2.gotoxy(0, 1)
+            Wconio2.cputs(f"Tempo de jogo: {tempo_decorrido:.1f}s   ")
+            Wconio2.gotoxy(0, 5)
+            Wconio2.cputs("Pressione 'P' para pausar ou 'Q' para sair.")
+
+            # Coloque aqui a movimentação dos personagens, pontuação, etc.
+
+        time.sleep(0.05)  # Evita uso excessivo da CPU
+
+finally:
+    Wconio2.setcursortype(1)  # Restaura o cursor ao sair
+    Wconio2.clrscr()
 
 # Configurações iniciais
 espaco = ' '
