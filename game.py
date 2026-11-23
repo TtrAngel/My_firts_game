@@ -10,14 +10,25 @@ import WConio2
 # Desenhar o menu de opções
 os.system('cls')
 
+amarelo = '\033[33m'
+branco = '\033[m'
+vermelho = '\033[31m'
+verde = '\033[32m'
+azul =  '\033[34m'
+
+print(amarelo)
 print("____________________________________________________________")
 print("\n")
-print("\t\t\tComendo um monte:\n")
-print("\t\t\tWelcome\n")
-print("\t\t\t[S] Bora?")
-print("\t\t\t[C] Sair\n\n")
+print(azul)
+print("\t\t\t   Comendo um monte:\n")
+print(branco)
+print("\t\t\t       WELCOME\n")
+print(azul)
+print("\t\t\t     [S] Bora?")
+print("\t\t\t     [C] Sair\n\n")
+print(amarelo)
 print("____________________________________________________________")
-
+print(branco)
 resposta = input().strip().upper()
 
 if resposta == "S":
@@ -60,9 +71,8 @@ while True:
     ]
 
     pontuacao = 0
-
-    bicho = '@'
-    comida = '*'
+    bicho = ':]'
+    comida = '°'
 
     # Posição inicial da comida
     while True:
@@ -146,6 +156,7 @@ while True:
 
             # Gerar nova comida em uma posição livre
             while True:
+    
                 comidaI = random.randint(0, linhas - 1)
                 comidaJ = random.randint(0, colunas - 1)
 
@@ -159,10 +170,15 @@ while True:
 
     # Tela de fim de jogo
     os.system('cls')
-
+    print(amarelo)
     print("============================================================")
+    print(branco)
+    print("\n\n")
     print("                         Fim de jogo")
+    print(amarelo)
+    print("\n\n")
     print("============================================================")
+    print(azul)
     print(f"Sua pontuação final foi: {pontuacao}")
     print("\nVocê perdeu!")
 
