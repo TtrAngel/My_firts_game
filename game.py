@@ -3,7 +3,6 @@ import os
 import sys
 import random
 import time
-import WConio2 as Wconio2
 import WConio2
 
 
@@ -44,54 +43,6 @@ else:
 
 os.system("pause")
 
-pausado = False
-tempo_inicio = time.perf_counter()
-tempo_total_pausado = 0.0
-inicio_pausa = 0.0
-
-Wconio2.clrscr()
-Wconio2.setcursortype(0)  # Esconde o cursor
-
-try:
-    while True:
-        # 1. Verifica se alguma tecla foi pressionada
-        if Wconio2.kbhit():
-            tecla = Wconio2.getch()[1].lower()
-
-            if tecla == 'p':
-                pausado = not pausado  # Alterna entre pausado e rodando
-
-                if pausado:
-                    inicio_pausa = time.perf_counter()
-                    Wconio2.gotoxy(0, 3)
-                    Wconio2.cputs("=== JOGO PAUSADO (Pressione P para voltar) ===")
-                else:
-                    # Soma o tempo que ficou parado ao acumulador
-                    tempo_total_pausado += time.perf_counter() - inicio_pausa
-                    Wconio2.gotoxy(0, 3)
-                    Wconio2.cputs("                                              ")
-
-            elif tecla == 'q':  # Tecla para sair
-                break
-
-        # 2. Lógica do jogo só roda se NÃO estiver pausado
-        if not pausado:
-            agora = time.perf_counter()
-            tempo_decorrido = agora - tempo_inicio - tempo_total_pausado
-
-            Wconio2.gotoxy(0, 1)
-            Wconio2.cputs(f"Tempo de jogo: {tempo_decorrido:.1f}s   ")
-            Wconio2.gotoxy(0, 5)
-            Wconio2.cputs("Pressione 'P' para pausar ou 'Q' para sair.")
-
-            # Coloque aqui a movimentação dos personagens, pontuação, etc.
-
-        time.sleep(0.05)  # Evita uso excessivo da CPU
-
-finally:
-    Wconio2.setcursortype(1)  # Restaura o cursor ao sair
-    Wconio2.clrscr()
-
 # Configurações iniciais
 espaco = ' '
 linhas = 15
@@ -118,8 +69,8 @@ while True:
     ]
 
     pontuacao = 0
-    bicho = ':]'
-    comida = '°'
+    bicho = '@'
+    comida = '*'
 
     # Posição inicial da comida
     while True:
@@ -132,7 +83,7 @@ while True:
 
     # Loop principal do jogo
     while True:
-        Wconio2.gotoxy(0, 0) #apaga a tela
+        WConio2.gotoxy(0, 0) #apaga a tela
 
         # Apagar o conteúdo da matriz
         for i in range(linhas):
@@ -166,6 +117,15 @@ while True:
 
             if tecla in ['a', 'd', 'w', 's']:
                 direcao = tecla
+
+            if tecla == 'p':
+                print("PAUSADO - Aperte 'P' novamente")
+                while True:
+                    if WConio2.kbhit():
+                        if WConio2.getch()[1].lower() == 'p':
+                            break
+                    time.sleep(0.05)
+                os.system('cls')
  
         # Posição da cabeça da cobra
         novaI = cobra[0][0]
