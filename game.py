@@ -6,15 +6,16 @@ import time
 import WConio2
 
 
-# Desenhar o menu de opções
 os.system('cls')
 
+# Desenhar as cores
 amarelo = '\033[33m'
 branco = '\033[m'
 vermelho = '\033[31m'
 verde = '\033[32m'
 azul =  '\033[34m'
 
+# Desenhar o menu de opções
 print(amarelo)
 print("____________________________________________________________")
 print("\n")
@@ -30,6 +31,7 @@ print("____________________________________________________________")
 print(branco)
 resposta = input().strip().upper()
 
+# Condições para escolha do jogar
 if resposta == "S":
     print("VOCÊ DECIDIU COMEÇAR.")
 
@@ -119,7 +121,14 @@ while True:
                 direcao = tecla
 
             if tecla == 'p':
-                print("PAUSADO - Aperte 'P' novamente")
+                os.system('cls')
+                print("===============================================")
+                print("\n")
+                print("\n")
+                print("\tPAUSADO - Aperte 'P' novamente")
+                print("\n")
+                print("\n")
+                print("===============================================")
                 while True:
                     if WConio2.kbhit():
                         if WConio2.getch()[1].lower() == 'p':
